@@ -27,7 +27,6 @@ public class Dao implements IDao {
 		Object[] params = new Object[] { str2 };
 		// 2. 查询操作
 		List<Words> list = (List<Words>) runner.query(conn, sql, new BeanListHandler(type), params);
-		System.out.println(list);
 		conn.close();
 		if (null != list && list.size() > 0) {
 			return true;

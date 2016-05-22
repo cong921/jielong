@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 import service.IService;
 import service.Service;
 
@@ -31,13 +33,12 @@ public class JudgeServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		// response.getWriter().append("Served at:
-		// ").append(request.getContextPath());
+		request.setCharacterEncoding("utf-8");
 		String str1 = request.getParameter("param1");
 		String str2 = request.getParameter("param2");
+		System.out.println(str1);
 		IService service=new Service();
-		boolean flag = false;
+		Boolean flag = false;
 		try {
 			flag = service.isRelated(str1,str2);
 		} catch (Exception e) {
@@ -45,7 +46,10 @@ public class JudgeServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 		System.out.println(flag);
-		request.setAttribute("flag",flag);
+//		request.setAttribute("flag",flag);
+		JSONObject obj=new JSONObject();
+		obj.put("flag",flag);
+		response.getWriter().print(obj);
 	}
 
 	/**
